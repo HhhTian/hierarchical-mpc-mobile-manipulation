@@ -35,19 +35,19 @@ This project is a minimal simulation of a mobile manipulator controlled by a hie
 ```bash
 pip install -r requirements.txt
 
-### 📦 Install the project as a local package (optional but recommended)
+## Install the project as a local package (optional but recommended)
 
 ```bash
 pip install -e .
 
-### 🚀 Run the simulation
+## Run the simulation
 
 ```bash
 python simulation/simulate.py
 
-### 📽️ Demo
+## Demo
 - Coming soon – animated comparison between HTMPC and ST control.
 
-### 📚 Reference
+## Reference
 Hierarchical Task Model Predictive Control for Sequential Mobile Manipulation Tasks
 Xintong Du, Siqi Zhou, Angela P. Schoellig (2024)
