@@ -37,13 +37,13 @@ This project is a minimal simulation of a mobile manipulator controlled by a hie
 pip install -r requirements.txt
 ```
 
-## 📦 Install the project as a local package (optional but recommended)
+## Install the project as a local package (optional but recommended)
 
 ```bash
 pip install -e .
 ```
 
-## 🚀 Run the simulation
+## Run the simulation
 
 ```bash
 python simulation/simulate.py
