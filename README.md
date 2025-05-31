@@ -13,6 +13,7 @@ This project is a minimal simulation of a mobile manipulator controlled by a hie
 - Compare with a single-task (ST) architecture baseline
 
 ## 🏗️ Project Structure
+
 - controller/
   - model.py - Double-integrator robot model
   - mpc.py - CasADi-based MPC controller
@@ -34,20 +35,25 @@ This project is a minimal simulation of a mobile manipulator controlled by a hie
 
 ```bash
 pip install -r requirements.txt
+```
 
 ## 📦 Install the project as a local package (optional but recommended)
 
 ```bash
 pip install -e .
+```
 
 ## 🚀 Run the simulation
 
 ```bash
 python simulation/simulate.py
+```
 
 ## 📽️ Demo
+
 - Coming soon – animated comparison between HTMPC and ST control.
 
 ## 📚 Reference
-Hierarchical Task Model Predictive Control for Sequential Mobile Manipulation Tasks
+
+**Hierarchical Task Model Predictive Control for Sequential Mobile Manipulation Tasks**  
 Xintong Du, Siqi Zhou, Angela P. Schoellig (2024)
