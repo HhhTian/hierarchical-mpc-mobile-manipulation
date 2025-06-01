@@ -54,7 +54,7 @@ class STMPC_EE_Tracking:
             Q = ca.diag(ca.DM([1.0, 20.0, 1.0])) # weight
             cost += ca.mtimes([e_k.T, Q, e_k])
 
-            cost += 0.01 * ca.dot(u_k, u_k)  # regularize control effort
+            cost += 0.003 * ca.dot(u_k, u_k)  # regularize control effort
             
             # v_k = x_k[self.model.n:]  #  vx, vy, v_ext, v_lift
             # cost += 0.1 * ca.dot(v_k, v_k)  # L2 penalty on speed  #============
