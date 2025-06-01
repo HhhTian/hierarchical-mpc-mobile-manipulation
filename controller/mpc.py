@@ -51,23 +51,24 @@ class STMPC_EE_Tracking:
             ee_pos = self.model.ee_position_casadi(x_k[:self.model.n])  # dh/forward kinematics
             e_k = ee_pos - r_seq[:, k]
             cost += ca.dot(e_k, e_k)  # tracking cost
-            Q = ca.diag(ca.DM([1.0, 20.0, 1.0]))
+            Q = ca.diag(ca.DM([1.0, 20.0, 1.0])) # weight
             cost += ca.mtimes([e_k.T, Q, e_k])
 
+            cost += 0.01 * ca.dot(u_k, u_k)  # regularize control effort
             
-            v_k = x_k[self.model.n:]  #  vx, vy, v_ext, v_lift
-            cost += 1 * ca.dot(v_k, v_k)  # L2 penalty on speed  #============
+            # v_k = x_k[self.model.n:]  #  vx, vy, v_ext, v_lift
+            # cost += 0.1 * ca.dot(v_k, v_k)  # L2 penalty on speed  #============
             
-            # Add input constrains: -1 <= u_k <= 1
-            g.append(u_k)
-            lbg += [-1.0] * nu
-            ubg += [ 1.0] * nu
+            # # Add input constrains: -1 <= u_k <= 1
+            # g.append(u_k)
+            # lbg += [-1.0] * nu
+            # ubg += [ 1.0] * nu
             
-            # speed constrain
-            g.append(v_k)
-            v_max = 1.0  #===============# 
-            lbg += [-v_max] * self.model.m
-            ubg += [ v_max] * self.model.m
+            # # speed constrain
+            # g.append(v_k)
+            # v_max = 1.0  #===============# 
+            # lbg += [-v_max] * self.model.m
+            # ubg += [ v_max] * self.model.m
             
             # # state range constrain [-5, 5]
             # x_next_pos = x_next[:self.model.n]  # only position part
@@ -122,7 +123,7 @@ class STMPC_EE_Tracking:
 
 
 """
-建议优化点
+优化点
 1.动态更新 A/B: 如果你的系统是非线性的，而 A/B 是线性化结果，应该在 _build_controller() 外部以当前状态为中心动态更新 A 和 B（否则可能不收敛或性能较差）。
 
 2.引入速度/加速度惩罚项（正则项）：
@@ -138,23 +139,4 @@ cost += ca.dot(u_k, u_k) * weight
 4.CasADi 表达式缓存或优化： 如果 model.ee_position_casadi() 内部每次都重新构建表达式，效率会比较低。考虑缓存表达式图。
 
 5.代码可视化调试： 添加 debug flag，输出每步 EE 的预测轨迹和误差，便于可视化对齐问题。
-"""
-
-
-"""
-你可以在 STMPC_EE_Tracking 中添加缓存，记录上一次的 
-U, 并在下一次调用 solve() 时用它作为 x0 的初始值：
-
-class STMPC_EE_Tracking:
-    def __init__(...):
-        ...
-        self.last_u = np.zeros((self.nu, self.horizon))
-
-    def solve(self, x0, ee_ref_seq):
-        p_val = np.concatenate([x0, ee_ref_seq.flatten()])
-        sol = self.solver(x0=self.last_u.flatten(), p=p_val)
-        u_opt = sol['x'].full().reshape(self.nu, self.horizon)
-        self.last_u = u_opt  # store for next round
-        return u_opt[:, 0]
-这样可以实现 warm start, 有助于加速收敛, 也更真实地模拟工业控制场景。
 """

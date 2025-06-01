@@ -11,7 +11,7 @@ import matplotlib.animation as animation
 # initialize
 dt = 0.1
 horizon = 100
-steps = 100  # simu time = steps * dt
+steps = 400  # simu time = steps * dt
 
 # system model
 model = HTMPCModel(dt=dt)

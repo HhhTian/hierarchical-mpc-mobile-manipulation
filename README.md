@@ -4,15 +4,15 @@ This project is a minimal simulation of a mobile manipulator controlled by a hie
 
 **"Hierarchical Task Model Predictive Control for Sequential Mobile Manipulation Tasks"**
 
-## 🌟 Project Goals
+## Project Goals
 
-- Reproduce key ideas of HTMPC using a simplified 2D mobile manipulator
+- Reproduce key ideas of HTMPC using a simplified 3D mobile manipulator
 - Implement a two-level task controller: 
   - T0: Keep the end-effector (EE) at a fixed point
   - T1: Track a desired base trajectory
 - Compare with a single-task (ST) architecture baseline
 
-## 🏗️ Project Structure
+## Project Structure
 
 - controller/
   - model.py - Double-integrator robot model
@@ -23,15 +23,20 @@ This project is a minimal simulation of a mobile manipulator controlled by a hie
   - visualizer.py - Plotting EE/base paths and errors
   - compare_st_ht.py - ST vs HTMPC comparison
 - results/ - Figures and animations
+- docs/ - Analysis report for each version, including 
+  - model 
+  - problems 
+  - troubleshooting
+  - summary and next steps
 
-## 🧪 Features
+## Features
 
 - CasADi-based MPC with lexicographic task structure
 - Multi-task tracking with task priority
 - Comparison with single-task baseline controller
 - Modular simulation framework
 
-## 📦 Install
+## Install
 
 ```bash
 pip install -r requirements.txt
@@ -49,11 +54,11 @@ pip install -e .
 python simulation/simulate.py
 ```
 
-## 📽️ Demo
+## Demo
 
 - Coming soon – animated comparison between HTMPC and ST control.
 
-## 📚 Reference
+## Reference
 
 **Hierarchical Task Model Predictive Control for Sequential Mobile Manipulation Tasks**  
 Xintong Du, Siqi Zhou, Angela P. Schoellig (2024)

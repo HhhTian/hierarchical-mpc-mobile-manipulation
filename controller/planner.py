@@ -31,8 +31,8 @@ def reference_trajectory(t, horizon=10, dt=0.1):
         # base_x = generate_base_square_wave(t_future)
         base_y = 0.0
         r_base_seq.append([base_x, base_y])
-        z = 1.2 + 0.1 * np.sin(0.2 * t_future)
-        # z = 1.2
+        # z = 1.2 + 0.1 * np.sin(0.2 * t_future)
+        z = 1.2
         r_ee_seq.append([2.0, 0.0, z])  # EE target fixed
 
     return np.array(r_base_seq), np.array(r_ee_seq)
